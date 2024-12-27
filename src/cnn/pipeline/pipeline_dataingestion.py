@@ -17,11 +17,11 @@ class DataIngestionPipeline:
 
 
 
-if __name__=="__main":
+if __name__=="__main__":
     try:
-        logger.info(">>>>>>>{stage_name}   started <<<<<<<<<<<<<<<")
+        logger.info(f">>>>>>>  {stage_name}   started <<<<<<<<<<<<<<<")
         DataIngestionPipeline().main()
-        logger.info(f">>>>>>>>>>>>>{stage_name} completed  <<<<<<<<<")
+        logger.info(f">>>>>>>>>>>>>  {stage_name} completed  <<<<<<<<<")
 
     except Exception as e:
         raise e
