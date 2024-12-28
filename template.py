@@ -23,6 +23,7 @@ file_list=[
     "research/trials.ipynb",
     "templates/index.html",
     "main.py",
+    "models"
     "requirements.txt"
 
     

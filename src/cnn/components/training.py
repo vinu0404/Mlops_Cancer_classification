@@ -1,8 +1,8 @@
 import tensorflow as tf
 from cnn.entity.config_entity import TrainingConfig
 from pathlib import Path
-
-
+import shutil
+import os
 
 
 
@@ -67,6 +67,25 @@ class Training:
     def save_model(path: Path, model: tf.keras.Model):
         model.save(path)
 
+    @staticmethod
+    def copy_model(source_path: str, destination_path: str):
+        try:
+            # Ensure the destination directory exists
+            os.makedirs(destination_path, exist_ok=True)
+            
+            # Copy the model file
+            shutil.copy(source_path, destination_path)
+            return f"Model copied successfully to {destination_path}"
+        except Exception as e:
+            raise Exception(f"Error while copying model: {str(e)}")
+ 
+
+
+
+    # Example usage:
+    # copy_model('path/to/source/model.h5', 'path/to/destination/folder/')
+
+
 
 
     
@@ -84,5 +103,10 @@ class Training:
 
         self.save_model(
             path=self.config.trained_model_path,
-            model=self.model
-        )
+            model=self.model)
+
+        self.copy_model("artifacts/training/trained_model.h5","models")
+
+
+        
+        
