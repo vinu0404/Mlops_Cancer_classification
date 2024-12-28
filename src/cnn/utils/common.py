@@ -11,8 +11,6 @@ from cnn import logger
 
 
 @ensure_annotations
-
-
 def read_yaml(path_yaml: Path) -> ConfigBox:
     try:
         with open(path_yaml, "r") as yaml_file:
@@ -37,7 +35,7 @@ def make_dir(path_dir:list,verbose=True):
 
 @ensure_annotations
 def save_json(path:Path,data:dict):
-    with open(path,"w"):
+    with open(path,"w") as f:
         json.dump(data,f,indent=4)
         logger.info(f"json file save at :{path}")
 

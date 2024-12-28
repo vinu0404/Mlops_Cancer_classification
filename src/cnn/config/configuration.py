@@ -1,6 +1,6 @@
 from cnn.constants.constants import *
-from cnn.utils.common import read_yaml,make_dir
-from cnn.entity.config_entity import DataIngestionConfig,PrepareBaseModelConfig,TrainingConfig
+from cnn.utils.common import read_yaml,make_dir,save_json
+from cnn.entity.config_entity import DataIngestionConfig,PrepareBaseModelConfig,TrainingConfig,EvaluationConfig
 from pathlib import Path
 import os 
 
@@ -74,7 +74,22 @@ class ConfigurationManager:
 
         )
         return trained_model_config
-        
+    
+
+
+
+    def get_evaluation_config(self) -> EvaluationConfig:
+        training_data=os.path.join(self.config.data_ingestion.unzip_dir,"Chest-CT-Scan-data")
+        eval_config = EvaluationConfig(
+            path_of_model=Path(self.config.training.trained_model_path),
+            training_data=Path(training_data),
+            mlflow_uri="https://dagshub.com/vinu0404/Mlops_Cancer_classification.mlflow",
+            all_params=self.params,
+            params_image_size=self.params.IMAGE_SIZE,
+            params_batch_size=self.params.BATCH_SIZE
+        )
+        return eval_config
+            
 
     
         

@@ -2,6 +2,19 @@ from src.cnn import logger
 from src.cnn.pipeline.pipeline_dataingestion import DataIngestionPipeline
 from src.cnn.pipeline.pipeline_prepare_base_model import PrepareModel
 from cnn.pipeline.pipeline_training import Training_model
+from cnn.pipeline.pipeline_evaluation_mlflow import eval_mlflow
+import distutils  # Avoid directly importing _modified
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# Access the environment variables
+mlflow_username = os.getenv('MLFLOW_TRACKING_USERNAME')
+mlflow_pswd = os.getenv('MLFLOW_TRACKING_PASSWORD')
+
+
+
 
 
 stage_name1="Data_ingestion_stage"
@@ -37,4 +50,21 @@ try:
     logger.info(f">>>>>>>>>>>>>  {stage_name3} completed  <<<<<<<<<")
 
 except Exception as e:
+    logger.info(f'{e}')
+    raise e
+
+
+
+
+
+
+stage_name4="Evaluation & Experiment Tracking"
+
+try:
+    logger.info(f">>>>>>>  {stage_name4}   started <<<<<<<<<<<<<<<")
+    eval_mlflow().main()
+    logger.info(f">>>>>>>>>>>>>  {stage_name4} completed  <<<<<<<<<")
+
+except Exception as e:
+    logger.info(f"{e}")
     raise e

@@ -11,3 +11,15 @@ Full Production Level Machine Learning Pipeline for Cancer Classification
 7.Update the pipeline
 8.Update the main.py
 9.Update the dvc.yaml
+
+
+
+## Credential for DAGSHUB:
+
+```import dagshub
+dagshub.init(repo_owner='vinu0404', repo_name='Mlops_Cancer_classification', mlflow=True)
+
+import mlflow
+with mlflow.start_run():
+  mlflow.log_param('parameter name', 'value')
+  mlflow.log_metric('metric name', 1)```
